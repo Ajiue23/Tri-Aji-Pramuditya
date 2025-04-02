@@ -1,19 +1,32 @@
 "use client";
 
+import { useEffect } from "react"; // Import useEffect for side effects
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowRight, Mail, Github, Linkedin, Twitter } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Twitter, Mail } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { ProjectCard } from "@/components/project-card";
-import { SkillsSection } from "@/components/skills-section";
-import { ContactForm } from "@/components/contact-form";
 import { ScrollAnimationWrapper } from "@/components/scroll-animation-wrapper";
 import { ParticleBackground } from "@/components/particle-background";
 
 export default function Home() {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const vantaEffect = VANTA.HALO({
+        el: "#vanta-background", // ID of the element to apply Vanta effect to
+        mouseControls: true, // Enable mouse controls
+        touchControls: true, // Enable touch controls
+        gyroControls: false, // Disable gyro controls
+        minHeight: 200.0, // Minimum height
+        minWidth: 200.0, // Minimum width
+      });
+
+      return () => {
+        if (vantaEffect) vantaEffect.destroy(); // Cleanup effect on unmount
+      };
+    }
+  }, []); // Empty dependency array ensures this runs only once on mount
+
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -55,7 +68,11 @@ export default function Home() {
       </header>
 
       <main className="flex flex-col items-center">
-        <section className="w-full h-[90vh] relative overflow-hidden">
+        {/* Vanta.js Halo Background */}
+        <section
+          id="vanta-background" // Apply the Halo effect to this section
+          className="w-full h-[90vh] relative overflow-hidden"
+        >
           <ParticleBackground />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="container">
