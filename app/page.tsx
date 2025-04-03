@@ -11,7 +11,7 @@ import { ProjectCard } from "@/components/project-card";
 import { SkillsSection } from "@/components/skills-section";
 import { ContactForm } from "@/components/contact-form";
 import { ScrollAnimationWrapper } from "@/components/scroll-animation-wrapper";
-import { ParticleBackground } from "@/components/particle-background";
+import { AnimatedGradientBackground } from "@/components/animated-gradient-background";
 
 export default function Home() {
   return (
@@ -28,7 +28,7 @@ export default function Home() {
               className="flex items-center justify-center"
               aria-label="Toggle theme"
             >
-              <span className="text-xl font-bold">Ajiue</span>
+              <span className="text-xl font-bold">Jane.Design</span>
             </button>
           </div>
           <nav className="hidden md:flex gap-6">
@@ -56,12 +56,12 @@ export default function Home() {
 
       <main className="flex flex-col items-center">
         <section className="w-full h-[90vh] relative overflow-hidden">
-          <ParticleBackground />
+          <AnimatedGradientBackground />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="container">
               <div className="max-w-2xl space-y-4">
                 <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                  UI/UX Designer <span className="text-primary"> & Front-End Developer</span>
+                  UI/UX Designer & <span className="text-primary">Developer</span>
                 </h1>
                 <p className="text-muted-foreground md:text-xl">Creating beautiful, functional, and accessible digital experiences that delight users and drive business growth.</p>
                 <div className="flex gap-4">
