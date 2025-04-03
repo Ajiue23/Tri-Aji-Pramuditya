@@ -12,6 +12,7 @@ import { SkillsSection } from "@/components/skills-section";
 import { ContactForm } from "@/components/contact-form";
 import { ScrollAnimationWrapper } from "@/components/scroll-animation-wrapper";
 import { ParticleBackground } from "@/components/particle-background";
+import { ParticlesBackground } from "@/components/particles-background";
 
 export default function Home() {
   return (
