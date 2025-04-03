@@ -4,24 +4,6 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  background: linear-gradient(45deg, #ff6b6b, #f5a623, #f9e44f, #6bff6b, #6b6bff);
-  background-size: 400% 400%;
-  animation: gradientBackground 10s ease infinite;
-}
-
-@keyframes gradientBackground {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 @layer utilities {
