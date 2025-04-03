@@ -12,6 +12,8 @@ import { SkillsSection } from "@/components/skills-section";
 import { ContactForm } from "@/components/contact-form";
 import { ScrollAnimationWrapper } from "@/components/scroll-animation-wrapper";
 import { ParticleBackground } from "@/components/particle-background";
+import AnimatedBackground from "../components/AnimatedBackground";
+import "../styles/globals.css";
 
 export default function Home() {
   return (
