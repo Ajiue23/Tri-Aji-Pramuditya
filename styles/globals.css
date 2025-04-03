@@ -16,7 +16,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(45deg, #ff6f61, #6b5b95, #88b04b);
+  background: linear-gradient(45deg, #d5a6d4, #f5a9b8, #ff6f61);
   background-size: 400% 400%;
   animation: gradient-animation 15s ease infinite;
 }
