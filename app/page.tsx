@@ -15,7 +15,7 @@ import { ParticleBackground } from "@/components/particle-background";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 animate-gradient-bg">
+    <div className="min-h-screen bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 animate-gradient-bg dark:from-blue-700 dark:via-indigo-600 dark:to-purple-800">
       <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
