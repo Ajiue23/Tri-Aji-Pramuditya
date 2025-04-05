@@ -71,7 +71,7 @@ export default function Home() {
                     </Link>
                   </Button>
                   <Button variant="outline" asChild>
-                    <Link href="#contact">Contact Me</Link>
+                    <Link href="#">My CV</Link>
                   </Button>
                 </div>
               </div>
