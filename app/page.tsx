@@ -32,6 +32,9 @@ export default function Home() {
             </button>
           </div>
           <nav className="hidden md:flex gap-6">
+            <Link href="#home" className="text-sm font-medium hover:text-primary">
+              Home
+            </Link>
             <Link href="#about" className="text-sm font-medium hover:text-primary">
               About
             </Link>
@@ -55,30 +58,33 @@ export default function Home() {
       </header>
 
       {/* Hero Section Start */}
+
       <main className="flex flex-col items-center">
-        <section className="w-full h-[90vh] relative overflow-hidden">
-          <ParticleBackground />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="container">
-              <div className="max-w-2xl space-y-4">
-                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                  UI/UX Designer <span className="text-primary"> & Front-End Developer</span>
-                </h1>
-                <p className="text-muted-foreground md:text-xl">Creating beautiful, functional, and accessible digital experiences that delight users and drive business growth.</p>
-                <div className="flex gap-4">
-                  <Button asChild>
-                    <Link href="#projects">
-                      View Projects <ArrowDown className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                  <Button variant="outline" asChild>
-                    <Link href="#">My CV</Link>
-                  </Button>
+        <ScrollAnimationWrapper id="home">
+          <section className="w-full h-[90vh] relative overflow-hidden">
+            <ParticleBackground />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="container">
+                <div className="max-w-2xl space-y-4">
+                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+                    UI/UX Designer <span className="text-primary"> & Front-End Developer</span>
+                  </h1>
+                  <p className="text-muted-foreground md:text-xl">Creating beautiful, functional, and accessible digital experiences that delight users and drive business growth.</p>
+                  <div className="flex gap-4">
+                    <Button asChild>
+                      <Link href="#projects">
+                        View Projects <ArrowDown className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                    <Button variant="outline" asChild>
+                      <Link href="#">My CV</Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </ScrollAnimationWrapper>
         {/* Hero Section End*/}
 
         {/* About Section Start*/}
