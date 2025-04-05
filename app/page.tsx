@@ -4,7 +4,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowRight, Mail, Github, Linkedin, Twitter } from "lucide-react";
+import { ArrowRight, Mail, Github, Linkedin, Twitter, ArrowDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { ProjectCard } from "@/components/project-card";
@@ -68,7 +68,7 @@ export default function Home() {
                 <div className="flex gap-4">
                   <Button asChild>
                     <Link href="#projects">
-                      View Projects <ArrowRight className="ml-2 h-4 w-4" />
+                      View Projects <ArrowDown className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
                   <Button variant="outline" asChild>
