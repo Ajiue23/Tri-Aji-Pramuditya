@@ -54,6 +54,7 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Hero Section Start */}
       <main className="flex flex-col items-center">
         <section className="w-full h-[90vh] relative overflow-hidden">
           <ParticleBackground />
@@ -78,7 +79,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+        {/* Hero Section End*/}
 
+        {/* About Section Start*/}
         <ScrollAnimationWrapper id="about">
           <section className="container py-24 md:py-32">
             <div className="grid gap-10 md:grid-cols-2 md:gap-16">
@@ -116,7 +119,9 @@ export default function Home() {
             </div>
           </section>
         </ScrollAnimationWrapper>
+        {/* About Section End */}
 
+        {/* Project Section Start */}
         <ScrollAnimationWrapper id="projects">
           <section className="container py-24 md:py-32">
             <div className="mx-auto max-w-3xl text-center">
@@ -207,7 +212,9 @@ export default function Home() {
             </div>
           </section>
         </ScrollAnimationWrapper>
+        {/* Project Section End */}
 
+        {/* Skills Section Start */}
         <ScrollAnimationWrapper id="skills">
           <section className="w-full py-24 md:py-32 bg-muted/50">
             <div className="container">
@@ -219,7 +226,9 @@ export default function Home() {
             </div>
           </section>
         </ScrollAnimationWrapper>
+        {/* Skills Section End */}
 
+        {/* Contact Section Start */}
         <ScrollAnimationWrapper id="contact">
           <section className="container py-24 md:py-32">
             <div className="mx-auto max-w-3xl text-center">
@@ -235,16 +244,18 @@ export default function Home() {
             </div>
             <div className="mt-12 flex justify-center gap-6">
               <Button variant="outline" size="lg" className="gap-2" asChild>
-                <Link href="mailto:hello@jane.design">
+                <Link href="mailto:triajipramuditya23@gmail.com">
                   <Mail className="h-4 w-4" />
-                  hello@jane.design
+                  triajipramuditya23@gmail.com
                 </Link>
               </Button>
             </div>
           </section>
         </ScrollAnimationWrapper>
       </main>
+      {/* Contact Section End */}
 
+      {/* Footer Start*/}
       <footer className="w-full border-t py-6">
         <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">&copy; {new Date().getFullYear()} Jane Smith. All rights reserved.</p>
@@ -270,6 +281,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      {/* Footer End */}
     </div>
   );
 }
