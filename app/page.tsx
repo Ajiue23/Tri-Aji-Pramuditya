@@ -48,7 +48,7 @@ export default function Home() {
           <div className="flex items-center gap-4">
             <ModeToggle />
             <Button asChild>
-              <Link href="#contact">Let's Talk</Link>
+              <Link href="https://wa.me/6281908108161">Let's Talk</Link>
             </Button>
           </div>
         </div>
