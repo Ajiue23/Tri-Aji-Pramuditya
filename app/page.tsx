@@ -120,7 +120,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="relative h-[400px] overflow-hidden rounded-lg">
-                <Image src="/Aku.jpg?height=800&width=600" alt="Tri Aji Pramuditya, UI/UX Designer" fill className="object-cover" priority />
+                <Image src="/Aku.svg?height=800&width=600" alt="Tri Aji Pramuditya, UI/UX Designer" fill className="object-cover" priority />
               </div>
             </div>
           </section>
