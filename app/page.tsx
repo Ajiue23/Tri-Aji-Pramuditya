@@ -264,7 +264,7 @@ export default function Home() {
       {/* Footer Start*/}
       <footer className="w-full border-t py-6">
         <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
-          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">&copy; {new Date().getFullYear()} Jane Smith. All rights reserved.</p>
+          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">&copy; {new Date().getFullYear()} Tri Aji Pramuditya. All rights reserved.</p>
           <div className="flex gap-4">
             <Button variant="ghost" size="icon" asChild>
               <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
