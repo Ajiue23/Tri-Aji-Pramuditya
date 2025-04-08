@@ -112,9 +112,9 @@ export default function Home() {
                     </Link>
                   </Button>
                   <Button variant="outline" size="icon" asChild>
-                    <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
                       <Twitter className="h-4 w-4" />
-                      <span className="sr-only">Twitter</span>
+                      <span className="sr-only">Instagram</span>
                     </Link>
                   </Button>
                 </div>
@@ -279,9 +279,9 @@ export default function Home() {
               </Link>
             </Button>
             <Button variant="ghost" size="icon" asChild>
-              <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
                 <Twitter className="h-4 w-4" />
-                <span className="sr-only">Twitter</span>
+                <span className="sr-only">Instagram</span>
               </Link>
             </Button>
           </div>
