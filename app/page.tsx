@@ -12,7 +12,6 @@ import { ProjectCard } from "@/components/project-card";
 import { SkillsSection } from "@/components/skills-section";
 import { ContactForm } from "@/components/contact-form";
 import { ScrollAnimationWrapper } from "@/components/scroll-animation-wrapper";
-import { ParticleBackground } from "@/components/particle-background";
 import { ArrowDown } from "lucide-react"; // Tambahan untuk tombol "View Projects"
 
 export default function Home() {
@@ -63,7 +62,6 @@ export default function Home() {
       <main className="flex flex-col items-center">
         <ScrollAnimationWrapper id="home">
           <section className="w-full h-[90vh] relative overflow-hidden">
-            <ParticleBackground />
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="container">
                 <div className="max-w-2xl space-y-4">
