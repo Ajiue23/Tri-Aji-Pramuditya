@@ -146,7 +146,7 @@ export default function Home() {
                   </Button>
                 </div>
               </div>
-              <div className="relative h-[600px] overflow-hidden rounded-lg">
+              <div className="relative h-[400px] overflow-hidden rounded-full">
                 <Image src="/Gue Anime.png" alt="Tri Aji Pramuditya, UI/UX Designer" fill className="object-cover" priority />
               </div>
             </div>
