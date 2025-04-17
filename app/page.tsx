@@ -146,8 +146,8 @@ export default function Home() {
                   </Button>
                 </div>
               </div>
-              <div className="relative h-[400px] overflow-hidden rounded-lg">
-                <Image src="/Gue Anime.png" alt="Tri Aji Pramuditya, UI/UX Designer" fill className="object-cover" priority />
+              <div className="relative h-[400px] w-full overflow-hidden rounded-3xl shadow-xl transition-transform duration-300 hover:scale-105">
+                <Image src="/Gue Anime.png" alt="Tri Aji Pramuditya, UI/UX Designer" fill className="object-cover object-top" priority />
               </div>
             </div>
           </section>
