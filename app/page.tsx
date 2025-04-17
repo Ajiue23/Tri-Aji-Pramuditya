@@ -4,7 +4,8 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowRight, Mail, Github, Linkedin, Twitter, ArrowDown } from "lucide-react";
+import { Github, Linkedin, Instagram, Dribbble, Youtube } from "lucide-react";
+import { FaBehance } from "react-icons/fa"; // hanya Behance yang tidak ada di lucide-react
 import Link from "next/link";
 import Image from "next/image";
 import { ProjectCard } from "@/components/project-card";
@@ -12,6 +13,7 @@ import { SkillsSection } from "@/components/skills-section";
 import { ContactForm } from "@/components/contact-form";
 import { ScrollAnimationWrapper } from "@/components/scroll-animation-wrapper";
 import { ParticleBackground } from "@/components/particle-background";
+import { ArrowDown } from "lucide-react"; // Tambahan untuk tombol "View Projects"
 
 export default function Home() {
   return (
@@ -57,8 +59,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Section Start */}
-
+      {/* Hero Section */}
       <main className="flex flex-col items-center">
         <ScrollAnimationWrapper id="home">
           <section className="w-full h-[90vh] relative overflow-hidden">
@@ -67,7 +68,7 @@ export default function Home() {
               <div className="container">
                 <div className="max-w-2xl space-y-4">
                   <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                    UI/UX Designer <span className="text-primary"> & Front-End Developer</span>
+                    UI/UX Designer <span className="text-primary">& Front-End Developer</span>
                   </h1>
                   <p className="text-muted-foreground md:text-xl">Creating beautiful, functional, and accessible digital experiences that delight users and drive business growth.</p>
                   <div className="flex gap-4">
@@ -94,27 +95,56 @@ export default function Home() {
               <div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Me</h2>
                 <div className="mt-4 space-y-4">
-                  <p>Hello! I'm Jane, a passionate UI/UX designer with over 5 years of experience creating digital products that users love.</p>
+                  <p>Hello! I'm Tri Aji Pramuditya, a passionate UI/UX designer with over 2 years of experience creating user interface and websites.</p>
                   <p>My approach combines aesthetic sensibility with user-centered design principles to create interfaces that are not only beautiful but also intuitive and accessible.</p>
-                  <p>When I'm not designing, you can find me exploring new design trends, contributing to open-source projects, or hiking in the mountains.</p>
+                  <p>When I'm not designing, you can find me exploring new design trends, contributing to open-source projects, or playing some games.</p>
                 </div>
                 <div className="mt-6 flex gap-4">
+                  {/* GitHub */}
                   <Button variant="outline" size="icon" asChild>
                     <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4" />
                       <span className="sr-only">GitHub</span>
                     </Link>
                   </Button>
+
+                  {/* LinkedIn */}
                   <Button variant="outline" size="icon" asChild>
                     <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
                       <Linkedin className="h-4 w-4" />
                       <span className="sr-only">LinkedIn</span>
                     </Link>
                   </Button>
+
+                  {/* Instagram */}
                   <Button variant="outline" size="icon" asChild>
                     <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                      <Twitter className="h-4 w-4" />
+                      <Instagram className="h-4 w-4" />
                       <span className="sr-only">Instagram</span>
+                    </Link>
+                  </Button>
+
+                  {/* Behance (react-icons) */}
+                  <Button variant="outline" size="icon" asChild>
+                    <Link href="https://behance.net" target="_blank" rel="noopener noreferrer">
+                      <FaBehance className="h-4 w-4" />
+                      <span className="sr-only">Behance</span>
+                    </Link>
+                  </Button>
+
+                  {/* Dribbble */}
+                  <Button variant="outline" size="icon" asChild>
+                    <Link href="https://dribbble.com" target="_blank" rel="noopener noreferrer">
+                      <Dribbble className="h-4 w-4" />
+                      <span className="sr-only">Dribbble</span>
+                    </Link>
+                  </Button>
+
+                  {/* YouTube */}
+                  <Button variant="outline" size="icon" asChild>
+                    <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+                      <Youtube className="h-4 w-4" />
+                      <span className="sr-only">YouTube</span>
                     </Link>
                   </Button>
                 </div>
