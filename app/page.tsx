@@ -4,7 +4,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Github, Linkedin, Instagram, Dribbble, Youtube } from "lucide-react";
+import { Github, Linkedin, Instagram, Dribbble, Youtube, ArrowDown, ArrowRight, Mail } from "lucide-react";
 import { FaBehance } from "react-icons/fa"; // hanya Behance yang tidak ada di lucide-react
 import Link from "next/link";
 import Image from "next/image";
@@ -12,7 +12,6 @@ import { ProjectCard } from "@/components/project-card";
 import { SkillsSection } from "@/components/skills-section";
 import { ContactForm } from "@/components/contact-form";
 import { ScrollAnimationWrapper } from "@/components/scroll-animation-wrapper";
-import { ArrowDown } from "lucide-react"; // Tambahan untuk tombol "View Projects"
 
 export default function Home() {
   return (
@@ -148,7 +147,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="relative h-[400px] overflow-hidden rounded-lg">
-                <Image src="/Aku.svg?height=800&width=600" alt="Tri Aji Pramuditya, UI/UX Designer" fill className="object-cover" priority />
+                <Image src="/Aku.svg" alt="Tri Aji Pramuditya, UI/UX Designer" fill className="object-cover" priority />
               </div>
             </div>
           </section>
@@ -176,24 +175,18 @@ export default function Home() {
                   <ProjectCard
                     title="E-commerce Redesign"
                     description="A complete redesign of an e-commerce platform focusing on improving conversion rates and user experience."
-                    image="/placeholder.svg?height=600&width=800"
+                    image="/placeholder.svg"
                     tags={["UI Design", "UX Research", "Prototyping"]}
                     link="#"
                   />
                   <ProjectCard
                     title="Finance Mobile App"
                     description="A mobile banking application designed to simplify personal finance management for millennials."
-                    image="/placeholder.svg?height=600&width=800"
+                    image="/placeholder.svg"
                     tags={["Mobile Design", "UI/UX", "Interaction"]}
                     link="#"
                   />
-                  <ProjectCard
-                    title="Travel Platform"
-                    description="A travel booking platform with an immersive UI and streamlined booking process."
-                    image="/placeholder.svg?height=600&width=800"
-                    tags={["Web Design", "UI/UX", "Branding"]}
-                    link="#"
-                  />
+                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
                 </div>
               </TabsContent>
               <TabsContent value="web" className="mt-8">
@@ -201,17 +194,11 @@ export default function Home() {
                   <ProjectCard
                     title="E-commerce Redesign"
                     description="A complete redesign of an e-commerce platform focusing on improving conversion rates and user experience."
-                    image="/placeholder.svg?height=600&width=800"
+                    image="/placeholder.svg"
                     tags={["UI Design", "UX Research", "Prototyping"]}
                     link="#"
                   />
-                  <ProjectCard
-                    title="Travel Platform"
-                    description="A travel booking platform with an immersive UI and streamlined booking process."
-                    image="/placeholder.svg?height=600&width=800"
-                    tags={["Web Design", "UI/UX", "Branding"]}
-                    link="#"
-                  />
+                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
                 </div>
               </TabsContent>
               <TabsContent value="mobile" className="mt-8">
@@ -219,7 +206,7 @@ export default function Home() {
                   <ProjectCard
                     title="Finance Mobile App"
                     description="A mobile banking application designed to simplify personal finance management for millennials."
-                    image="/placeholder.svg?height=600&width=800"
+                    image="/placeholder.svg"
                     tags={["Mobile Design", "UI/UX", "Interaction"]}
                     link="#"
                   />
@@ -227,13 +214,7 @@ export default function Home() {
               </TabsContent>
               <TabsContent value="branding" className="mt-8">
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  <ProjectCard
-                    title="Travel Platform"
-                    description="A travel booking platform with an immersive UI and streamlined booking process."
-                    image="/placeholder.svg?height=600&width=800"
-                    tags={["Web Design", "UI/UX", "Branding"]}
-                    link="#"
-                  />
+                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
                 </div>
               </TabsContent>
             </Tabs>
@@ -308,7 +289,7 @@ export default function Home() {
             </Button>
             <Button variant="ghost" size="icon" asChild>
               <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                <Twitter className="h-4 w-4" />
+                <Instagram className="h-4 w-4" />
                 <span className="sr-only">Instagram</span>
               </Link>
             </Button>
