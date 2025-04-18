@@ -82,9 +82,9 @@ export default function Home() {
                       </Button>
                     </div>
                   </div>
-                  {/* Logo di hero section - sekarang di sebelah kanan */}
+                  {/* Logo Hero Section */}
                   <div className="hidden md:block">
-                    <Image src="/logo-circle.png" alt="Ajiue Logo" width={300} height={300} className="rounded-2xl" />
+                    <Image src="/logo-circle.png" alt="Ajiue Logo" width={400} height={400} className="rounded-2xl" />
                   </div>
                 </div>
               </div>
