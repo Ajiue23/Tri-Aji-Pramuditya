@@ -353,7 +353,7 @@ export default function Home() {
                     tags={["UI Design", "Mobile Apps"]}
                     link="#"
                   />
-                  <ProjectCard title="PlantUp" description="Create an agricultural e-commerce application design and conduct research" image="/Project2.svg" tags={["Mobile Design", "UI/UX", "Interaction"]} link="#" />
+                  <ProjectCard title="PlantUp" description="Create an agricultural e-commerce application design and conduct research" image="/Project2.png" tags={["Mobile Design", "UI/UX", "Interaction"]} link="#" />
                   <ProjectCard
                     title="Golek SoluTI"
                     description="Creating an IT service provider website or software house that provides website creation services for MSMEs, Portfolio and IT Tasks."
@@ -377,7 +377,7 @@ export default function Home() {
                 </div>
               </TabsContent>
 
-              {/* Apps Design tab content (replacing Mobile) */}
+              {/* Apps Design tab content */}
               <TabsContent value="apps" className="mt-0 outline-none">
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                   <ProjectCard
