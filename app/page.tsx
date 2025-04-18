@@ -242,8 +242,6 @@ export default function Home() {
                     <div className="absolute inset-0  rounded-2xl animate-pulse" style={{ animationDuration: "3s" }}></div>
                     <Image src="/logo-circle.png" alt="Ajiue Logo" width={320} height={320} className="rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 w-full md:w-[500px]" />
                   </div>
-                  {/* Background shape */}
-                  <div className="absolute -z-10 -right-10 -bottom-10 w-64 h-64 bg-primary/5 rounded-full blur-2xl"></div>
                 </div>
               </div>
             </div>
