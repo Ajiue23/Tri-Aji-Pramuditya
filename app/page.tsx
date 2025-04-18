@@ -28,6 +28,8 @@ export default function Home() {
               className="flex items-center justify-center"
               aria-label="Toggle theme"
             >
+              {/* Logo ditambahkan di sini */}
+              <Image src="/logo.png" alt="Ajiue Logo" width={32} height={32} className="mr-2" />
               <span className="text-xl font-bold">Ajiue</span>
             </button>
           </div>
