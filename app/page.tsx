@@ -328,14 +328,20 @@ export default function Home() {
             </div>
 
             <Tabs defaultValue="all" className="w-full">
-              <div className="flex justify-center mb-8 overflow-x-auto pb-2">
-                <TabsList className="p-1 bg-muted rounded-full h-auto">
-                  {["all", "web", "apps"].map((category) => (
-                    <TabsTrigger key={category} value={category} className="px-3 sm:px-5 py-2 data-[state=active]:shadow-none data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-full transition-all whitespace-nowrap">
-                      {category === "all" ? "All Projects" : category === "web" ? "Web Design" : "Apps Design"}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
+              <div className="flex justify-center mb-8">
+                <div className="w-full max-w-md overflow-x-auto scrollbar-hide">
+                  <TabsList className="p-1 bg-muted rounded-full h-auto w-full flex justify-between">
+                    {["all", "web", "apps"].map((category) => (
+                      <TabsTrigger
+                        key={category}
+                        value={category}
+                        className="flex-1 px-3 sm:px-5 py-2 data-[state=active]:shadow-none data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-full transition-all text-center"
+                      >
+                        {category === "all" ? "All Projects" : category === "web" ? "Web Design" : "Apps Design"}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                </div>
               </div>
 
               <TabsContent value="all" className="mt-0 outline-none">
