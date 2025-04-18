@@ -381,7 +381,7 @@ export default function Home() {
               <TabsContent value="apps" className="mt-0 outline-none">
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                   <ProjectCard
-                    title="MyXL App Redesign – UI Enhancement"
+                    title="MyXL App Redesign"
                     description="This project focuses on the UI redesign of the MyXL mobile application, a self-service platform used by XL Axiata customers to manage their mobile plans, check balances, purchase data packages, and access other services."
                     image="/Project1.svg"
                     tags={["UI Design", "Mobile Apps"]}
