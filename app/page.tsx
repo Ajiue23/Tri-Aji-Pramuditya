@@ -171,16 +171,11 @@ export default function Home() {
         {/* Hero Section */}
         <ScrollAnimationWrapper id="home">
           <section className="w-full min-h-[95vh] flex items-center relative overflow-hidden">
-            {/* Decorative elements - fixed positioning for mobile stability */}
-            <div className="fixed inset-0 -z-10 bg-background">
-              {/* Main gradient background that fills entire screen */}
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background"></div>
-              {/* Static decorative blobs */}
-              <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-1/3 left-1/3 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-            </div>
+            {/* Decorative elements */}
+            <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-1/3 left-1/3 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
 
-            <div className="container relative z-10">
+            <div className="container">
               <div className="flex flex-col md:flex-row items-center justify-between gap-12 pt-20">
                 <div className="max-w-2xl space-y-6">
                   <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-2">
@@ -243,8 +238,8 @@ export default function Home() {
 
                 {/* Hero Image with effects */}
                 <div className="relative mt-8 md:mt-0">
-                  <div className="relative z-10 rounded-2xl overflow-hidden p-1">
-                    <div className="absolute inset-0 rounded-2xl animate-pulse" style={{ animationDuration: "3s" }}></div>
+                  <div className="relative z-10 rounded-2xl overflow-hidden  p-1">
+                    <div className="absolute inset-0  rounded-2xl animate-pulse" style={{ animationDuration: "3s" }}></div>
                     <Image src="/logo-circle.png" alt="Ajiue Logo" width={320} height={320} className="rounded-xl transition-all duration-300 w-full md:w-[500px]" />
                   </div>
                 </div>
