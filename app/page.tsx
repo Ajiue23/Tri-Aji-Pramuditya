@@ -240,7 +240,7 @@ export default function Home() {
                 <div className="relative mt-8 md:mt-0">
                   <div className="relative z-10 rounded-2xl overflow-hidden  p-1">
                     <div className="absolute inset-0  rounded-2xl animate-pulse" style={{ animationDuration: "3s" }}></div>
-                    <Image src="/logo-circle.png" alt="Ajiue Logo" width={320} height={320} className="rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 w-full md:w-[500px]" />
+                    <Image src="/logo-circle.png" alt="Ajiue Logo" width={320} height={320} className="rounded-xl transition-all duration-300 w-full md:w-[500px]" />
                   </div>
                 </div>
               </div>
