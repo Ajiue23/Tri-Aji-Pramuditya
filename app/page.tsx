@@ -315,11 +315,6 @@ export default function Home() {
                   />
                 </div>
               </TabsContent>
-              <TabsContent value="branding" className="mt-0 outline-none">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
-                </div>
-              </TabsContent>
             </Tabs>
           </section>
         </ScrollAnimationWrapper>
