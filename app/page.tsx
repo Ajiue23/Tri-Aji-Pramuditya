@@ -29,7 +29,7 @@ export default function Home() {
               aria-label="Toggle theme"
             >
               {/* Logo ditambahkan di sini */}
-              <Image src="/logo.png" alt="Ajiue Logo" width={32} height={32} className="mr-2" />
+              <Image src="/logo-circle.png" alt="Ajiue Logo" width={32} height={32} className="mr-2" />
               <span className="text-xl font-bold">Ajiue</span>
             </button>
           </div>
@@ -63,7 +63,7 @@ export default function Home() {
                   </div>
                   {/* Logo di hero section - sekarang di sebelah kanan */}
                   <div className="hidden md:block">
-                    <Image src="/logo-large.png" alt="Ajiue Logo" width={300} height={300} className="rounded-2xl" />
+                    <Image src="/logo-circle.png" alt="Ajiue Logo" width={300} height={300} className="rounded-2xl" />
                   </div>
                 </div>
               </div>
