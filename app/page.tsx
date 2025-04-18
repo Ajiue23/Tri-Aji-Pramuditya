@@ -349,15 +349,15 @@ export default function Home() {
                   <ProjectCard
                     title="MyXL App Redesign"
                     description="This project focuses on the UI redesign of the MyXL mobile application, a self-service platform used by XL Axiata customers to manage their mobile plans, check balances, purchase data packages, and access other services."
-                    image="/Project1.png"
+                    image="/"
                     tags={["UI Design", "Mobile Apps"]}
                     link="#"
                   />
-                  <ProjectCard title="PlantUp" description="Create an agricultural e-commerce application design and conduct research" image="/Project2.png" tags={["Mobile Design", "UI/UX", "Interaction"]} link="#" />
+                  <ProjectCard title="PlantUp" description="Create an agricultural e-commerce application design and conduct research" image="/" tags={["Mobile Design", "UI/UX", "Interaction"]} link="#" />
                   <ProjectCard
                     title="Golek SoluTI"
                     description="Creating an IT service provider website or software house that provides website creation services for MSMEs, Portfolio and IT Tasks."
-                    image="/Project3.png"
+                    image="/"
                     tags={["Web Design", "UI/UX", "Front-End"]}
                     link="#"
                   />
@@ -370,7 +370,7 @@ export default function Home() {
                   <ProjectCard
                     title="Golek SoluTI"
                     description="Creating an IT service provider website or software house that provides website creation services for MSMEs, Portfolio and IT Tasks."
-                    image="/Project3.png"
+                    image="/"
                     tags={["Web Design", "UI/UX", "Front-End"]}
                     link="#"
                   />
@@ -383,11 +383,11 @@ export default function Home() {
                   <ProjectCard
                     title="MyXL App Redesign"
                     description="This project focuses on the UI redesign of the MyXL mobile application, a self-service platform used by XL Axiata customers to manage their mobile plans, check balances, purchase data packages, and access other services."
-                    image="/Project1.png"
+                    image="/"
                     tags={["UI Design", "Mobile Apps"]}
                     link="#"
                   />
-                  <ProjectCard title="PlantUp" description="Create an agricultural e-commerce application design and conduct research" image="/Project2.png" tags={["Mobile Design", "UI/UX", "Interaction"]} link="#" />
+                  <ProjectCard title="PlantUp" description="Create an agricultural e-commerce application design and conduct research" image="/" tags={["Mobile Design", "UI/UX", "Interaction"]} link="#" />
                 </div>
               </TabsContent>
             </Tabs>
