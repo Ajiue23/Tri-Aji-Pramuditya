@@ -4,20 +4,53 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Github, Linkedin, Instagram, Dribbble, Youtube, ArrowDown, ArrowRight, Mail } from "lucide-react";
-import { FaBehance } from "react-icons/fa"; // hanya Behance yang tidak ada di lucide-react
+import { Github, Linkedin, Instagram, Dribbble, Youtube, ArrowDown, ArrowRight, Mail, ChevronRight } from "lucide-react";
+import { FaBehance } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 import { ProjectCard } from "@/components/project-card";
 import { SkillsSection } from "@/components/skills-section";
 import { ContactForm } from "@/components/contact-form";
 import { ScrollAnimationWrapper } from "@/components/scroll-animation-wrapper";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
+  // Handle scroll effects
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+
+      // Determine active section
+      const sections = ["home", "about", "projects", "skills", "contact"];
+      const currentSection = sections.find((section) => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+
+      if (currentSection) {
+        setActiveSection(currentSection);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
+    <div className="min-h-screen bg-background selection:bg-primary/20 selection:text-primary">
+      {/* Gradient background */}
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background"></div>
+
+      {/* Header */}
+      <header className={`sticky top-0 z-40 w-full transition-all duration-300 ${scrolled ? "border-b bg-background/80 backdrop-blur-lg py-2" : "bg-transparent py-4"}`}>
+        <div className="container flex items-center justify-between">
           <div className="flex items-center gap-2">
             <button
               onClick={() => {
@@ -25,286 +58,432 @@ export default function Home() {
                 document.documentElement.classList.toggle("dark");
                 localStorage.setItem("theme", theme);
               }}
-              className="flex items-center justify-center"
+              className="flex items-center justify-center group"
               aria-label="Toggle theme"
             >
-              {/* Logo ditambahkan di sini */}
-              <Image src="/logo-circle.png" alt="Ajiue Logo" width={32} height={32} className="mr-2" />
-              <span className="text-xl font-bold">Ajiue</span>
+              <Image src="/logo-circle.png" alt="Ajiue Logo" width={38} height={38} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
+              <span className="text-xl font-bold tracking-tight">
+                Aji<span className="text-primary">ue</span>
+              </span>
             </button>
           </div>
-          <nav className="hidden md:flex gap-6">
-            <Link href="#home" className="text-sm font-medium hover:text-primary">
-              Home
-            </Link>
-            <Link href="#about" className="text-sm font-medium hover:text-primary">
-              About
-            </Link>
-            <Link href="#projects" className="text-sm font-medium hover:text-primary">
-              Projects
-            </Link>
-            <Link href="#skills" className="text-sm font-medium hover:text-primary">
-              Skills
-            </Link>
-            <Link href="#contact" className="text-sm font-medium hover:text-primary">
-              Contact
-            </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex gap-8">
+            {["home", "about", "projects", "skills", "contact"].map((section) => (
+              <Link key={section} href={`#${section}`} className={`relative text-sm font-medium transition-colors hover:text-primary ${activeSection === section ? "text-primary" : "text-foreground/70"}`}>
+                <span className="capitalize">{section}</span>
+                {activeSection === section && <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary" />}
+              </Link>
+            ))}
           </nav>
-          <div className="flex items-center gap-4">
+
+          {/* Mobile Navigation Button - Will need a matching component for the mobile menu */}
+          <div className="md:hidden">
+            <Button variant="ghost" size="sm" className="px-2">
+              <span className="sr-only">Open menu</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                <line x1="4" x2="20" y1="12" y2="12" />
+                <line x1="4" x2="20" y1="6" y2="6" />
+                <line x1="4" x2="20" y1="18" y2="18" />
+              </svg>
+            </Button>
+          </div>
+
+          <div className="hidden md:flex items-center gap-4">
             <ModeToggle />
-            <Button asChild>
+            <Button asChild className="px-6 font-medium rounded-full hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
               <Link href="https://wa.me/6281908108161">Let's Talk</Link>
             </Button>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
+      {/* Main Content */}
       <main className="flex flex-col items-center">
+        {/* Hero Section */}
         <ScrollAnimationWrapper id="home">
-          <section className="w-full h-[90vh] relative overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="container">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-                  <div className="max-w-2xl space-y-4">
-                    <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                      UI/UX Designer <span className="text-primary">& Front-End Developer</span>
-                    </h1>
-                    <p className="text-muted-foreground md:text-xl">Creating beautiful, functional, and accessible digital experiences that delight users and drive business growth.</p>
-                    <div className="flex gap-4">
-                      <Button asChild>
-                        <Link href="#projects">
-                          View Projects <ArrowDown className="ml-2 h-4 w-4" />
+          <section className="w-full min-h-[95vh] flex items-center relative overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-1/3 left-1/3 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+
+            <div className="container">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-12 pt-20">
+                <div className="max-w-2xl space-y-6">
+                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-2">
+                    <span className="relative flex h-2 w-2 mr-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    Available for freelance work
+                  </div>
+
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+                    <span className="text-foreground">UI/UX Designer</span>{" "}
+                    <span className="inline-block">
+                      <span className="relative">
+                        <span className="text-primary">&</span>
+                        <svg className="absolute -bottom-1 left-0 w-full" height="6" viewBox="0 0 100 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M0.5 3C17 -0.5 29.5 -0.5 47.5 3C65.5 6.5 78 6.5 99.5 3" stroke="currentColor" strokeWidth="2" className="text-primary/40" />
+                        </svg>
+                      </span>{" "}
+                      Front-End Developer
+                    </span>
+                  </h1>
+
+                  <p className="text-xl text-muted-foreground leading-relaxed">Creating beautiful, functional, and accessible digital experiences that delight users and drive business growth.</p>
+
+                  <div className="flex flex-wrap gap-4 pt-4">
+                    <Button asChild size="lg" className="rounded-full px-6 font-medium hover:translate-y-[-2px] transition-all">
+                      <Link href="#projects">
+                        View Projects <ArrowDown className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                    <Button variant="outline" asChild size="lg" className="rounded-full px-6 font-medium border-foreground/20 hover:bg-foreground/5 hover:border-foreground/30 transition-all">
+                      <Link href="#">Download CV</Link>
+                    </Button>
+                  </div>
+
+                  <div className="pt-8 flex items-center gap-4 text-muted-foreground">
+                    <span className="text-sm font-medium">Follow me:</span>
+                    <div className="flex gap-3">
+                      {[
+                        { icon: <Github className="h-4 w-4" />, href: "https://github.com", label: "GitHub" },
+                        { icon: <Linkedin className="h-4 w-4" />, href: "https://linkedin.com", label: "LinkedIn" },
+                        { icon: <Instagram className="h-4 w-4" />, href: "https://instagram.com", label: "Instagram" },
+                        { icon: <FaBehance className="h-4 w-4" />, href: "https://behance.net", label: "Behance" },
+                      ].map((social, idx) => (
+                        <Link
+                          key={idx}
+                          href={social.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center w-8 h-8 rounded-full bg-foreground/5 hover:bg-foreground/10 hover:text-primary transition-colors"
+                          aria-label={social.label}
+                        >
+                          {social.icon}
                         </Link>
-                      </Button>
-                      <Button variant="outline" asChild>
-                        <Link href="#">Download CV</Link>
-                      </Button>
+                      ))}
                     </div>
                   </div>
-                  {/* Logo Hero Section */}
-                  <div className="hidden md:block">
-                    <Image src="/logo-circle.png" alt="Ajiue Logo" width={500} height={500} className="rounded-2xl" />
+                </div>
+
+                {/* Hero Image with effects */}
+                <div className="relative">
+                  <div className="relative z-10 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-transparent p-1">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-2xl animate-pulse" style={{ animationDuration: "3s" }}></div>
+                    <Image src="/logo-circle.png" alt="Ajiue Logo" width={500} height={500} className="rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300" />
                   </div>
+                  {/* Background shape */}
+                  <div className="absolute -z-10 -right-10 -bottom-10 w-64 h-64 bg-primary/5 rounded-full blur-2xl"></div>
                 </div>
               </div>
             </div>
           </section>
         </ScrollAnimationWrapper>
-        {/* Hero Section End*/}
 
-        {/* About Section Start*/}
+        {/* About Section */}
         <ScrollAnimationWrapper id="about">
           <section className="container py-24 md:py-32">
-            <div className="grid gap-10 md:grid-cols-2 md:gap-16">
-              <div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Me</h2>
-                <div className="mt-4 space-y-4">
-                  <p>Hello! I'm Tri Aji Pramuditya, a passionate UI/UX designer with over 2 years of experience creating user interface and websites.</p>
+            <div className="grid gap-12 md:grid-cols-2 md:gap-16 items-center">
+              <div className="order-2 md:order-1">
+                <div className="bg-gradient-to-br from-primary/10 to-transparent p-1 rounded-3xl">
+                  <div className="relative h-[500px] w-full overflow-hidden rounded-2xl shadow-xl transition-transform duration-500 hover:scale-[1.02] group">
+                    <Image src="/Gue Anime.png" alt="Tri Aji Pramuditya, UI/UX Designer" fill className="object-cover object-top transition-transform duration-700 group-hover:scale-105" priority />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="order-1 md:order-2">
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+                  <span>About me</span>
+                </div>
+                <h2 className="text-3xl font-bold tracking-tight mb-6 md:text-4xl">Crafting digital experiences that matter</h2>
+                <div className="space-y-4 text-muted-foreground">
+                  <p>
+                    Hello! I'm <span className="text-foreground font-medium">Tri Aji Pramuditya</span>, a passionate UI/UX designer with over 2 years of experience creating user interfaces and websites.
+                  </p>
                   <p>My approach combines aesthetic sensibility with user-centered design principles to create interfaces that are not only beautiful but also intuitive and accessible.</p>
                   <p>When I'm not designing, you can find me exploring new design trends, contributing to open-source projects, or playing some games.</p>
                 </div>
-                <div className="mt-6 flex gap-4">
-                  {/* GitHub */}
-                  <Button variant="outline" size="icon" asChild>
-                    <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
-                      <Github className="h-4 w-4" />
-                      <span className="sr-only">GitHub</span>
-                    </Link>
-                  </Button>
 
-                  {/* LinkedIn */}
-                  <Button variant="outline" size="icon" asChild>
-                    <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                      <Linkedin className="h-4 w-4" />
-                      <span className="sr-only">LinkedIn</span>
-                    </Link>
-                  </Button>
-
-                  {/* Instagram */}
-                  <Button variant="outline" size="icon" asChild>
-                    <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                      <Instagram className="h-4 w-4" />
-                      <span className="sr-only">Instagram</span>
-                    </Link>
-                  </Button>
-
-                  {/* Behance (react-icons) */}
-                  <Button variant="outline" size="icon" asChild>
-                    <Link href="https://behance.net" target="_blank" rel="noopener noreferrer">
-                      <FaBehance className="h-4 w-4" />
-                      <span className="sr-only">Behance</span>
-                    </Link>
-                  </Button>
-
-                  {/* Dribbble */}
-                  <Button variant="outline" size="icon" asChild>
-                    <Link href="https://dribbble.com" target="_blank" rel="noopener noreferrer">
-                      <Dribbble className="h-4 w-4" />
-                      <span className="sr-only">Dribbble</span>
-                    </Link>
-                  </Button>
-
-                  {/* YouTube */}
-                  <Button variant="outline" size="icon" asChild>
-                    <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-                      <Youtube className="h-4 w-4" />
-                      <span className="sr-only">YouTube</span>
-                    </Link>
-                  </Button>
+                <div className="mt-10 grid grid-cols-2 gap-4">
+                  <div className="p-4 rounded-lg bg-foreground/5">
+                    <h3 className="text-3xl font-bold text-primary">2+</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">Years of experience</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-foreground/5">
+                    <h3 className="text-3xl font-bold text-primary">50+</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">Projects completed</p>
+                  </div>
                 </div>
-              </div>
-              <div className="relative h-[400px] w-full overflow-hidden rounded-3xl shadow-xl transition-transform duration-300 hover:scale-105">
-                <Image src="/Gue Anime.png" alt="Tri Aji Pramuditya, UI/UX Designer" fill className="object-cover object-top" priority />
+
+                <div className="mt-8 flex gap-4">
+                  {/* Social buttons */}
+                  {[
+                    { icon: <Github className="h-4 w-4" />, href: "https://github.com", label: "GitHub" },
+                    { icon: <Linkedin className="h-4 w-4" />, href: "https://linkedin.com", label: "LinkedIn" },
+                    { icon: <Instagram className="h-4 w-4" />, href: "https://instagram.com", label: "Instagram" },
+                    { icon: <FaBehance className="h-4 w-4" />, href: "https://behance.net", label: "Behance" },
+                    { icon: <Dribbble className="h-4 w-4" />, href: "https://dribbble.com", label: "Dribbble" },
+                    { icon: <Youtube className="h-4 w-4" />, href: "https://youtube.com", label: "YouTube" },
+                  ].map((social, idx) => (
+                    <Button key={idx} variant="outline" size="icon" asChild className="rounded-lg border-foreground/10 hover:border-primary/50 hover:text-primary">
+                      <Link href={social.href} target="_blank" rel="noopener noreferrer">
+                        {social.icon}
+                        <span className="sr-only">{social.label}</span>
+                      </Link>
+                    </Button>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
         </ScrollAnimationWrapper>
-        {/* About Section End */}
 
-        {/* Project Section Start */}
+        {/* Projects Section */}
         <ScrollAnimationWrapper id="projects">
           <section className="container py-24 md:py-32">
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Featured Projects</h2>
-              <p className="mt-4 text-muted-foreground md:text-xl">A selection of my recent work in UI/UX design and development.</p>
-            </div>
-            <Tabs defaultValue="all" className="mt-12">
-              <div className="flex justify-center">
-                <TabsList>
-                  <TabsTrigger value="all">All</TabsTrigger>
-                  <TabsTrigger value="web">Web Design</TabsTrigger>
-                  <TabsTrigger value="mobile">Mobile Apps</TabsTrigger>
-                  <TabsTrigger value="branding">Branding</TabsTrigger>
-                </TabsList>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-12">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+                  <span>Portfolio</span>
+                </div>
+                <h2 className="text-3xl font-bold tracking-tight mb-4 md:text-4xl">Featured Projects</h2>
+                <p className="text-muted-foreground md:text-lg">A selection of my recent work in UI/UX design and development.</p>
               </div>
-              <TabsContent value="all" className="mt-8">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  <ProjectCard
-                    title="E-commerce Redesign"
-                    description="A complete redesign of an e-commerce platform focusing on improving conversion rates and user experience."
-                    image="/placeholder.svg"
-                    tags={["UI Design", "UX Research", "Prototyping"]}
-                    link="#"
-                  />
-                  <ProjectCard
-                    title="Finance Mobile App"
-                    description="A mobile banking application designed to simplify personal finance management for millennials."
-                    image="/placeholder.svg"
-                    tags={["Mobile Design", "UI/UX", "Interaction"]}
-                    link="#"
-                  />
-                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
-                </div>
-              </TabsContent>
-              <TabsContent value="web" className="mt-8">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  <ProjectCard
-                    title="E-commerce Redesign"
-                    description="A complete redesign of an e-commerce platform focusing on improving conversion rates and user experience."
-                    image="/placeholder.svg"
-                    tags={["UI Design", "UX Research", "Prototyping"]}
-                    link="#"
-                  />
-                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
-                </div>
-              </TabsContent>
-              <TabsContent value="mobile" className="mt-8">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  <ProjectCard
-                    title="Finance Mobile App"
-                    description="A mobile banking application designed to simplify personal finance management for millennials."
-                    image="/placeholder.svg"
-                    tags={["Mobile Design", "UI/UX", "Interaction"]}
-                    link="#"
-                  />
-                </div>
-              </TabsContent>
-              <TabsContent value="branding" className="mt-8">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
-                </div>
-              </TabsContent>
-            </Tabs>
-            <div className="mt-12 text-center">
-              <Button variant="outline" asChild>
+              <Button variant="outline" asChild className="rounded-full px-5 font-medium border-foreground/20 hover:border-primary/50 hover:text-primary">
                 <Link href="#">
                   View All Projects <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
+
+            <Tabs defaultValue="all" className="w-full">
+              <div className="flex justify-center mb-8">
+                <TabsList className="p-1 bg-muted rounded-full h-auto">
+                  {["all", "web", "mobile", "branding"].map((category) => (
+                    <TabsTrigger key={category} value={category} className="px-5 py-2 data-[state=active]:shadow-none data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-full transition-all">
+                      {category === "all" ? "All Projects" : category === "web" ? "Web Design" : category === "mobile" ? "Mobile Apps" : "Branding"}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </div>
+
+              <TabsContent value="all" className="mt-0 outline-none">
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                  <ProjectCard
+                    title="E-commerce Redesign"
+                    description="A complete redesign of an e-commerce platform focusing on improving conversion rates and user experience."
+                    image="/placeholder.svg"
+                    tags={["UI Design", "UX Research", "Prototyping"]}
+                    link="#"
+                  />
+                  <ProjectCard
+                    title="Finance Mobile App"
+                    description="A mobile banking application designed to simplify personal finance management for millennials."
+                    image="/placeholder.svg"
+                    tags={["Mobile Design", "UI/UX", "Interaction"]}
+                    link="#"
+                  />
+                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
+                </div>
+              </TabsContent>
+
+              {/* Other tabs content stays the same */}
+              <TabsContent value="web" className="mt-0 outline-none">
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                  <ProjectCard
+                    title="E-commerce Redesign"
+                    description="A complete redesign of an e-commerce platform focusing on improving conversion rates and user experience."
+                    image="/placeholder.svg"
+                    tags={["UI Design", "UX Research", "Prototyping"]}
+                    link="#"
+                  />
+                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
+                </div>
+              </TabsContent>
+              <TabsContent value="mobile" className="mt-0 outline-none">
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                  <ProjectCard
+                    title="Finance Mobile App"
+                    description="A mobile banking application designed to simplify personal finance management for millennials."
+                    image="/placeholder.svg"
+                    tags={["Mobile Design", "UI/UX", "Interaction"]}
+                    link="#"
+                  />
+                </div>
+              </TabsContent>
+              <TabsContent value="branding" className="mt-0 outline-none">
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
+                </div>
+              </TabsContent>
+            </Tabs>
           </section>
         </ScrollAnimationWrapper>
-        {/* Project Section End */}
 
-        {/* Skills Section Start */}
+        {/* Skills Section */}
         <ScrollAnimationWrapper id="skills">
-          <section className="w-full py-24 md:py-32 bg-muted/50">
+          <section className="w-full py-24 md:py-32 bg-gradient-to-b from-background to-primary/5">
             <div className="container">
-              <div className="mx-auto max-w-3xl text-center">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Skills & Expertise</h2>
-                <p className="mt-4 text-muted-foreground md:text-xl">My toolkit and areas of expertise in design and development.</p>
+              <div className="max-w-2xl mb-16">
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+                  <span>Expertise</span>
+                </div>
+                <h2 className="text-3xl font-bold tracking-tight mb-4 md:text-4xl">Skills & Tools</h2>
+                <p className="text-muted-foreground md:text-lg">My toolkit and areas of expertise in design and development.</p>
               </div>
-              <SkillsSection />
+              <SkillsSection /> {/* Keep your existing component */}
             </div>
           </section>
         </ScrollAnimationWrapper>
-        {/* Skills Section End */}
 
-        {/* Contact Section Start */}
+        {/* Contact Section */}
         <ScrollAnimationWrapper id="contact">
           <section className="container py-24 md:py-32">
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Let's Work Together</h2>
-              <p className="mt-4 text-muted-foreground md:text-xl">Have a project in mind? Let's discuss how I can help bring your vision to life.</p>
-            </div>
-            <div className="mx-auto mt-12 max-w-lg">
-              <Card>
-                <CardContent className="p-6">
-                  <ContactForm />
-                </CardContent>
-              </Card>
-            </div>
-            <div className="mt-12 flex justify-center gap-6">
-              <Button variant="outline" size="lg" className="gap-2" asChild>
-                <Link href="mailto:triajipramuditya23@gmail.com">
-                  <Mail className="h-4 w-4" />
-                  triajipramuditya23@gmail.com
-                </Link>
-              </Button>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="max-w-xl">
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+                  <span>Contact</span>
+                </div>
+                <h2 className="text-3xl font-bold tracking-tight mb-4 md:text-4xl">Let's Work Together</h2>
+                <p className="text-muted-foreground mb-8 md:text-lg">Have a project in mind? Let's discuss how I can help bring your vision to life.</p>
+
+                <div className="space-y-6">
+                  {[
+                    {
+                      icon: <Mail className="h-5 w-5" />,
+                      title: "Email",
+                      value: "triajipramuditya23@gmail.com",
+                      href: "mailto:triajipramuditya23@gmail.com",
+                    },
+                    {
+                      icon: <span className="flex h-5 w-5 items-center justify-center">📱</span>,
+                      title: "Phone",
+                      value: "+62 819-0810-8161",
+                      href: "tel:+6281908108161",
+                    },
+                    {
+                      icon: <span className="flex h-5 w-5 items-center justify-center">📍</span>,
+                      title: "Location",
+                      value: "Jakarta, Indonesia",
+                      href: "#",
+                    },
+                  ].map((item, idx) => (
+                    <Link key={idx} href={item.href} className="flex items-start gap-4 p-4 rounded-lg hover:bg-foreground/5 transition-colors group">
+                      <div className="flex-shrink-0 h-10 w-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">{item.icon}</div>
+                      <div>
+                        <h3 className="font-medium">{item.title}</h3>
+                        <p className="text-muted-foreground">{item.value}</p>
+                      </div>
+                      <ChevronRight className="h-5 w-5 ml-auto text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <Card className="border-0 shadow-lg bg-card rounded-xl overflow-hidden">
+                  <CardContent className="p-6">
+                    <div className="mb-6">
+                      <h3 className="text-xl font-bold mb-2">Send a Message</h3>
+                      <p className="text-sm text-muted-foreground">Fill out the form below and I'll get back to you ASAP.</p>
+                    </div>
+                    <ContactForm /> {/* Keep your existing component */}
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </section>
         </ScrollAnimationWrapper>
       </main>
-      {/* Contact Section End */}
 
-      {/* Footer Start*/}
-      <footer className="w-full border-t py-6">
-        <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
-          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">&copy; {new Date().getFullYear()} Tri Aji Pramuditya. All rights reserved.</p>
-          <div className="flex gap-4">
-            <Button variant="ghost" size="icon" asChild>
-              <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
-                <Github className="h-4 w-4" />
-                <span className="sr-only">GitHub</span>
+      {/* Footer */}
+      <footer className="w-full border-t py-12 bg-foreground/5">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center mb-4">
+                <Image src="/logo-circle.png" alt="Ajiue Logo" width={32} height={32} className="mr-2" />
+                <span className="text-xl font-bold tracking-tight">
+                  Aji<span className="text-primary">ue</span>
+                </span>
+              </div>
+              <p className="text-sm text-muted-foreground mb-4 max-w-xs">Crafting beautiful digital experiences that delight users and drive business growth.</p>
+              <div className="flex gap-3">
+                {[
+                  { icon: <Github className="h-4 w-4" />, href: "https://github.com", label: "GitHub" },
+                  { icon: <Linkedin className="h-4 w-4" />, href: "https://linkedin.com", label: "LinkedIn" },
+                  { icon: <Instagram className="h-4 w-4" />, href: "https://instagram.com", label: "Instagram" },
+                ].map((social, idx) => (
+                  <Link
+                    key={idx}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-foreground/5 hover:bg-foreground/10 hover:text-primary transition-colors"
+                    aria-label={social.label}
+                  >
+                    {social.icon}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-medium mb-4">Navigation</h3>
+              <nav className="flex flex-col gap-2">
+                {["Home", "About", "Projects", "Skills", "Contact"].map((item) => (
+                  <Link key={item} href={`#${item.toLowerCase()}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    {item}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
+            <div>
+              <h3 className="font-medium mb-4">Get in Touch</h3>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">
+                  <Mail className="h-4 w-4 inline-block mr-2" />
+                  triajipramuditya23@gmail.com
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  <span className="inline-block mr-2">📱</span>
+                  +62 819-0810-8161
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 pt-6 border-t border-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-center text-sm text-muted-foreground md:text-left">&copy; {new Date().getFullYear()} Tri Aji Pramuditya. All rights reserved.</p>
+            <div className="flex gap-4 text-sm text-muted-foreground">
+              <Link href="#" className="hover:text-primary transition-colors">
+                Privacy Policy
               </Link>
-            </Button>
-            <Button variant="ghost" size="icon" asChild>
-              <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                <Linkedin className="h-4 w-4" />
-                <span className="sr-only">LinkedIn</span>
+              <Link href="#" className="hover:text-primary transition-colors">
+                Terms of Service
               </Link>
-            </Button>
-            <Button variant="ghost" size="icon" asChild>
-              <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                <Instagram className="h-4 w-4" />
-                <span className="sr-only">Instagram</span>
-              </Link>
-            </Button>
+            </div>
           </div>
         </div>
       </footer>
-      {/* Footer End */}
+
+      {/* Scroll to top button */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className={`fixed right-6 bottom-6 z-50 p-3 rounded-full bg-primary/90 text-white shadow-lg transition-all duration-300 hover:bg-primary ${scrolled ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"}`}
+        aria-label="Scroll to top"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+          <polyline points="18 15 12 9 6 15" />
+        </svg>
+      </button>
     </div>
   );
 }
