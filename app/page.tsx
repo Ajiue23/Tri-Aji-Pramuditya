@@ -332,9 +332,9 @@ export default function Home() {
             <Tabs defaultValue="all" className="w-full">
               <div className="flex justify-center mb-8 overflow-x-auto pb-2">
                 <TabsList className="p-1 bg-muted rounded-full h-auto">
-                  {["all", "web", "mobile", "branding"].map((category) => (
+                  {["all", "web", "apps"].map((category) => (
                     <TabsTrigger key={category} value={category} className="px-3 sm:px-5 py-2 data-[state=active]:shadow-none data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-full transition-all whitespace-nowrap">
-                      {category === "all" ? "All Projects" : category === "web" ? "Web Design" : category === "mobile" ? "Mobile Apps" : "Branding"}
+                      {category === "all" ? "All Projects" : category === "web" ? "Web Design" : "Apps Design"}
                     </TabsTrigger>
                   ))}
                 </TabsList>
@@ -356,11 +356,11 @@ export default function Home() {
                     tags={["Mobile Design", "UI/UX", "Interaction"]}
                     link="#"
                   />
-                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
+                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX"]} link="#" />
                 </div>
               </TabsContent>
 
-              {/* Other tabs content stays the same */}
+              {/* Web Design tab content */}
               <TabsContent value="web" className="mt-0 outline-none">
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                   <ProjectCard
@@ -370,10 +370,12 @@ export default function Home() {
                     tags={["UI Design", "UX Research", "Prototyping"]}
                     link="#"
                   />
-                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
+                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX"]} link="#" />
                 </div>
               </TabsContent>
-              <TabsContent value="mobile" className="mt-0 outline-none">
+
+              {/* Apps Design tab content (replacing Mobile) */}
+              <TabsContent value="apps" className="mt-0 outline-none">
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                   <ProjectCard
                     title="Finance Mobile App"
@@ -382,11 +384,6 @@ export default function Home() {
                     tags={["Mobile Design", "UI/UX", "Interaction"]}
                     link="#"
                   />
-                </div>
-              </TabsContent>
-              <TabsContent value="branding" className="mt-0 outline-none">
-                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
                 </div>
               </TabsContent>
             </Tabs>
