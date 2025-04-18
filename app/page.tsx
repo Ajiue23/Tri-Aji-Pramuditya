@@ -171,8 +171,8 @@ export default function Home() {
 
                 {/* Hero Image with effects */}
                 <div className="relative">
-                  <div className="relative z-10 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-transparent p-1">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-2xl animate-pulse" style={{ animationDuration: "3s" }}></div>
+                  <div className="relative z-10 rounded-2xl overflow-hidden">
+                    <div className="absolute inset-0 rounded-2xl animate-pulse" style={{ animationDuration: "3s" }}></div>
                     <Image src="/logo-circle.png" alt="Ajiue Logo" width={500} height={500} className="rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300" />
                   </div>
                 </div>
