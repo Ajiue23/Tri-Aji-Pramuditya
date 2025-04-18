@@ -4,7 +4,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Github, Linkedin, Instagram, Dribbble, Youtube, ArrowDown, ArrowRight, Mail, ChevronRight } from "lucide-react";
+import { Github, Linkedin, Instagram, Dribbble, Youtube, ArrowDown, ArrowRight, Mail, ChevronRight, Moon, Sun, Menu, X } from "lucide-react";
 import { FaBehance } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
@@ -17,6 +17,30 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState("light");
+
+  // Handle theme toggle
+  useEffect(() => {
+    // Check local storage or system preference
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+    } else if (prefersDark) {
+      setTheme("dark");
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme", newTheme);
+  };
 
   // Handle scroll effects
   useEffect(() => {
@@ -43,6 +67,11 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu when clicking on a link
+  const handleNavClick = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-background selection:bg-primary/20 selection:text-primary">
       {/* Gradient background */}
@@ -52,15 +81,7 @@ export default function Home() {
       <header className={`sticky top-0 z-40 w-full transition-all duration-300 ${scrolled ? "border-b bg-background/80 backdrop-blur-lg py-2" : "bg-transparent py-4"}`}>
         <div className="container flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => {
-                const theme = document.documentElement.classList.contains("dark") ? "light" : "dark";
-                document.documentElement.classList.toggle("dark");
-                localStorage.setItem("theme", theme);
-              }}
-              className="flex items-center justify-center group"
-              aria-label="Toggle theme"
-            >
+            <button onClick={toggleTheme} className="flex items-center justify-center group" aria-label="Toggle theme">
               <Image src="/logo-circle.png" alt="Ajiue Logo" width={38} height={38} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
               <span className="text-xl font-bold tracking-tight">
                 Aji<span className="text-primary">ue</span>
@@ -78,26 +99,72 @@ export default function Home() {
             ))}
           </nav>
 
-          {/* Mobile Navigation Button - Will need a matching component for the mobile menu */}
-          <div className="md:hidden">
-            <Button variant="ghost" size="sm" className="px-2">
+          {/* Mobile Navigation Button */}
+          <div className="md:hidden flex items-center gap-2">
+            {/* Dark Mode Toggle for Mobile */}
+            <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-foreground/5" aria-label="Toggle dark mode">
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </button>
+
+            <Button variant="ghost" size="sm" className="px-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               <span className="sr-only">Open menu</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-                <line x1="4" x2="20" y1="12" y2="12" />
-                <line x1="4" x2="20" y1="6" y2="6" />
-                <line x1="4" x2="20" y1="18" y2="18" />
-              </svg>
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <ModeToggle />
+            {/* Dark Mode Toggle Button */}
+            <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-foreground/10 transition-colors" aria-label="Toggle dark mode">
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </button>
+
             <Button asChild className="px-6 font-medium rounded-full hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
               <Link href="https://wa.me/6281908108161">Let's Talk</Link>
             </Button>
           </div>
         </div>
       </header>
+
+      {/* Mobile Navigation Menu */}
+      <div className={`fixed inset-0 z-30 bg-background/95 backdrop-blur-md transition-transform duration-300 ease-in-out ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"} md:hidden`}>
+        <div className="container h-full flex flex-col justify-center">
+          <nav className="flex flex-col items-center gap-8 text-lg">
+            {["home", "about", "projects", "skills", "contact"].map((section) => (
+              <Link key={section} href={`#${section}`} onClick={handleNavClick} className={`relative font-medium transition-colors hover:text-primary ${activeSection === section ? "text-primary" : "text-foreground/70"}`}>
+                <span className="capitalize">{section}</span>
+              </Link>
+            ))}
+
+            <div className="mt-8">
+              <Button asChild className="px-6 py-2 rounded-full">
+                <Link href="https://wa.me/6281908108161" onClick={handleNavClick}>
+                  Let's Talk
+                </Link>
+              </Button>
+            </div>
+
+            <div className="mt-8 flex gap-4">
+              {[
+                { icon: <Github className="h-5 w-5" />, href: "https://github.com", label: "GitHub" },
+                { icon: <Linkedin className="h-5 w-5" />, href: "https://linkedin.com", label: "LinkedIn" },
+                { icon: <Instagram className="h-5 w-5" />, href: "https://instagram.com", label: "Instagram" },
+                { icon: <FaBehance className="h-5 w-5" />, href: "https://behance.net", label: "Behance" },
+              ].map((social, idx) => (
+                <Link
+                  key={idx}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleNavClick}
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-foreground/5 hover:bg-foreground/10 hover:text-primary transition-colors"
+                >
+                  {social.icon}
+                </Link>
+              ))}
+            </div>
+          </nav>
+        </div>
+      </div>
 
       {/* Main Content */}
       <main className="flex flex-col items-center">
@@ -119,7 +186,7 @@ export default function Home() {
                     Available for freelance work
                   </div>
 
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
                     <span className="text-foreground">UI/UX Designer</span>{" "}
                     <span className="inline-block">
                       <span className="relative">
@@ -132,7 +199,7 @@ export default function Home() {
                     </span>
                   </h1>
 
-                  <p className="text-xl text-muted-foreground leading-relaxed">Creating beautiful, functional, and accessible digital experiences that delight users and drive business growth.</p>
+                  <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">Creating beautiful, functional, and accessible digital experiences that delight users and drive business growth.</p>
 
                   <div className="flex flex-wrap gap-4 pt-4">
                     <Button asChild size="lg" className="rounded-full px-6 font-medium hover:translate-y-[-2px] transition-all">
@@ -170,11 +237,13 @@ export default function Home() {
                 </div>
 
                 {/* Hero Image with effects */}
-                <div className="relative">
-                  <div className="relative z-10 rounded-2xl overflow-hidden">
-                    <div className="absolute inset-0 rounded-2xl animate-pulse" style={{ animationDuration: "3s" }}></div>
-                    <Image src="/logo-circle.png" alt="Ajiue Logo" width={500} height={500} className="rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300" />
+                <div className="relative mt-8 md:mt-0">
+                  <div className="relative z-10 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-transparent p-1">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-2xl animate-pulse" style={{ animationDuration: "3s" }}></div>
+                    <Image src="/logo-circle.png" alt="Ajiue Logo" width={320} height={320} className="rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 w-full md:w-[500px]" />
                   </div>
+                  {/* Background shape */}
+                  <div className="absolute -z-10 -right-10 -bottom-10 w-64 h-64 bg-primary/5 rounded-full blur-2xl"></div>
                 </div>
               </div>
             </div>
@@ -183,11 +252,11 @@ export default function Home() {
 
         {/* About Section */}
         <ScrollAnimationWrapper id="about">
-          <section className="container py-24 md:py-32">
+          <section className="container py-16 md:py-32">
             <div className="grid gap-12 md:grid-cols-2 md:gap-16 items-center">
               <div className="order-2 md:order-1">
                 <div className="bg-gradient-to-br from-primary/10 to-transparent p-1 rounded-3xl">
-                  <div className="relative h-[500px] w-full overflow-hidden rounded-2xl shadow-xl transition-transform duration-500 hover:scale-[1.02] group">
+                  <div className="relative h-[400px] sm:h-[500px] w-full overflow-hidden rounded-2xl shadow-xl transition-transform duration-500 hover:scale-[1.02] group">
                     <Image src="/Gue Anime.png" alt="Tri Aji Pramuditya, UI/UX Designer" fill className="object-cover object-top transition-transform duration-700 group-hover:scale-105" priority />
                     {/* Gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -199,7 +268,7 @@ export default function Home() {
                 <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
                   <span>About me</span>
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight mb-6 md:text-4xl">Crafting digital experiences that matter</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-6 md:text-4xl">Crafting digital experiences that matter</h2>
                 <div className="space-y-4 text-muted-foreground">
                   <p>
                     Hello! I'm <span className="text-foreground font-medium">Tri Aji Pramuditya</span>, a passionate UI/UX designer with over 2 years of experience creating user interfaces and websites.
@@ -219,7 +288,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="mt-8 flex gap-4">
+                <div className="mt-8 flex flex-wrap gap-4">
                   {/* Social buttons */}
                   {[
                     { icon: <Github className="h-4 w-4" />, href: "https://github.com", label: "GitHub" },
@@ -244,16 +313,16 @@ export default function Home() {
 
         {/* Projects Section */}
         <ScrollAnimationWrapper id="projects">
-          <section className="container py-24 md:py-32">
+          <section className="container py-16 md:py-32">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-12">
               <div className="max-w-2xl">
                 <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
                   <span>Portfolio</span>
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight mb-4 md:text-4xl">Featured Projects</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 md:text-4xl">Featured Projects</h2>
                 <p className="text-muted-foreground md:text-lg">A selection of my recent work in UI/UX design and development.</p>
               </div>
-              <Button variant="outline" asChild className="rounded-full px-5 font-medium border-foreground/20 hover:border-primary/50 hover:text-primary">
+              <Button variant="outline" asChild className="rounded-full px-5 font-medium border-foreground/20 hover:border-primary/50 hover:text-primary mt-4 md:mt-0">
                 <Link href="#">
                   View All Projects <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -261,10 +330,10 @@ export default function Home() {
             </div>
 
             <Tabs defaultValue="all" className="w-full">
-              <div className="flex justify-center mb-8">
+              <div className="flex justify-center mb-8 overflow-x-auto pb-2">
                 <TabsList className="p-1 bg-muted rounded-full h-auto">
                   {["all", "web", "mobile", "branding"].map((category) => (
-                    <TabsTrigger key={category} value={category} className="px-5 py-2 data-[state=active]:shadow-none data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-full transition-all">
+                    <TabsTrigger key={category} value={category} className="px-3 sm:px-5 py-2 data-[state=active]:shadow-none data-[state=active]:bg-primary/10 data-[state=active]:text-primary rounded-full transition-all whitespace-nowrap">
                       {category === "all" ? "All Projects" : category === "web" ? "Web Design" : category === "mobile" ? "Mobile Apps" : "Branding"}
                     </TabsTrigger>
                   ))}
@@ -272,7 +341,7 @@ export default function Home() {
               </div>
 
               <TabsContent value="all" className="mt-0 outline-none">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                   <ProjectCard
                     title="E-commerce Redesign"
                     description="A complete redesign of an e-commerce platform focusing on improving conversion rates and user experience."
@@ -293,7 +362,7 @@ export default function Home() {
 
               {/* Other tabs content stays the same */}
               <TabsContent value="web" className="mt-0 outline-none">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                   <ProjectCard
                     title="E-commerce Redesign"
                     description="A complete redesign of an e-commerce platform focusing on improving conversion rates and user experience."
@@ -305,7 +374,7 @@ export default function Home() {
                 </div>
               </TabsContent>
               <TabsContent value="mobile" className="mt-0 outline-none">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                   <ProjectCard
                     title="Finance Mobile App"
                     description="A mobile banking application designed to simplify personal finance management for millennials."
@@ -315,19 +384,24 @@ export default function Home() {
                   />
                 </div>
               </TabsContent>
+              <TabsContent value="branding" className="mt-0 outline-none">
+                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX", "Branding"]} link="#" />
+                </div>
+              </TabsContent>
             </Tabs>
           </section>
         </ScrollAnimationWrapper>
 
         {/* Skills Section */}
         <ScrollAnimationWrapper id="skills">
-          <section className="w-full py-24 md:py-32 bg-gradient-to-b from-background to-primary/5">
+          <section className="w-full py-16 md:py-32 bg-gradient-to-b from-background to-primary/5">
             <div className="container">
-              <div className="max-w-2xl mb-16">
+              <div className="max-w-2xl mb-12 md:mb-16">
                 <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
                   <span>Expertise</span>
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight mb-4 md:text-4xl">Skills & Tools</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 md:text-4xl">Skills & Tools</h2>
                 <p className="text-muted-foreground md:text-lg">My toolkit and areas of expertise in design and development.</p>
               </div>
               <SkillsSection /> {/* Keep your existing component */}
@@ -337,13 +411,13 @@ export default function Home() {
 
         {/* Contact Section */}
         <ScrollAnimationWrapper id="contact">
-          <section className="container py-24 md:py-32">
+          <section className="container py-16 md:py-32">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="max-w-xl">
                 <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
                   <span>Contact</span>
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight mb-4 md:text-4xl">Let's Work Together</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 md:text-4xl">Let's Work Together</h2>
                 <p className="text-muted-foreground mb-8 md:text-lg">Have a project in mind? Let's discuss how I can help bring your vision to life.</p>
 
                 <div className="space-y-6">
@@ -379,7 +453,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div>
+              <div className="mt-6 md:mt-0">
                 <Card className="border-0 shadow-lg bg-card rounded-xl overflow-hidden">
                   <CardContent className="p-6">
                     <div className="mb-6">
@@ -398,7 +472,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="w-full border-t py-12 bg-foreground/5">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center mb-4">
                 <Image src="/logo-circle.png" alt="Ajiue Logo" width={32} height={32} className="mr-2" />
