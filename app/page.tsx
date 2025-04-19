@@ -347,20 +347,20 @@ export default function Home() {
               <TabsContent value="all" className="mt-0 outline-none">
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                   <ProjectCard
-                    title="MyXL App Redesign"
-                    description="This project focuses on the UI redesign of the MyXL mobile application, a self-service platform used by XL Axiata customers to manage their mobile plans, check balances, purchase data packages, and access other services."
-                    image="/"
-                    tags={["UI Design", "Mobile Apps"]}
+                    title="E-commerce Redesign"
+                    description="A complete redesign of an e-commerce platform focusing on improving conversion rates and user experience."
+                    image="/placeholder.svg"
+                    tags={["UI Design", "UX Research", "Prototyping"]}
                     link="#"
                   />
-                  <ProjectCard title="PlantUp" description="Create an agricultural e-commerce application design and conduct research" image="/" tags={["Mobile Design", "UI/UX", "Interaction"]} link="#" />
                   <ProjectCard
-                    title="Golek SoluTI"
-                    description="Creating an IT service provider website or software house that provides website creation services for MSMEs, Portfolio and IT Tasks."
-                    image="/"
-                    tags={["Web Design", "UI/UX", "Front-End"]}
+                    title="Finance Mobile App"
+                    description="A mobile banking application designed to simplify personal finance management for millennials."
+                    image="/placeholder.svg"
+                    tags={["Mobile Design", "UI/UX", "Interaction"]}
                     link="#"
                   />
+                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX"]} link="#" />
                 </div>
               </TabsContent>
 
@@ -368,26 +368,26 @@ export default function Home() {
               <TabsContent value="web" className="mt-0 outline-none">
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                   <ProjectCard
-                    title="Golek SoluTI"
-                    description="Creating an IT service provider website or software house that provides website creation services for MSMEs, Portfolio and IT Tasks."
-                    image="/"
-                    tags={["Web Design", "UI/UX", "Front-End"]}
+                    title="E-commerce Redesign"
+                    description="A complete redesign of an e-commerce platform focusing on improving conversion rates and user experience."
+                    image="/placeholder.svg"
+                    tags={["UI Design", "UX Research", "Prototyping"]}
                     link="#"
                   />
+                  <ProjectCard title="Travel Platform" description="A travel booking platform with an immersive UI and streamlined booking process." image="/placeholder.svg" tags={["Web Design", "UI/UX"]} link="#" />
                 </div>
               </TabsContent>
 
-              {/* Apps Design tab content */}
+              {/* Apps Design tab content (replacing Mobile) */}
               <TabsContent value="apps" className="mt-0 outline-none">
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                   <ProjectCard
-                    title="MyXL App Redesign"
-                    description="This project focuses on the UI redesign of the MyXL mobile application, a self-service platform used by XL Axiata customers to manage their mobile plans, check balances, purchase data packages, and access other services."
-                    image="/"
-                    tags={["UI Design", "Mobile Apps"]}
+                    title="Finance Mobile App"
+                    description="A mobile banking application designed to simplify personal finance management for millennials."
+                    image="/placeholder.svg"
+                    tags={["Mobile Design", "UI/UX", "Interaction"]}
                     link="#"
                   />
-                  <ProjectCard title="PlantUp" description="Create an agricultural e-commerce application design and conduct research" image="/" tags={["Mobile Design", "UI/UX", "Interaction"]} link="#" />
                 </div>
               </TabsContent>
             </Tabs>
