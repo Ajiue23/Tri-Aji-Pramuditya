@@ -145,10 +145,10 @@ export default function Home() {
 
             <div className="mt-8 flex gap-4">
               {[
-                { icon: <Github className="h-5 w-5" />, href: "https://github.com", label: "GitHub" },
-                { icon: <Linkedin className="h-5 w-5" />, href: "https://linkedin.com", label: "LinkedIn" },
-                { icon: <Instagram className="h-5 w-5" />, href: "https://instagram.com", label: "Instagram" },
-                { icon: <FaBehance className="h-5 w-5" />, href: "https://behance.net", label: "Behance" },
+                { icon: <Github className="h-5 w-5" />, href: "https://github.com/Ajiue23", label: "GitHub" },
+                { icon: <Linkedin className="h-5 w-5" />, href: "https://www.linkedin.com/in/tri-aji-pramuditya-32b151243/", label: "LinkedIn" },
+                { icon: <Instagram className="h-5 w-5" />, href: "https://www.instagram.com/triajipr/", label: "Instagram" },
+                { icon: <FaBehance className="h-5 w-5" />, href: "https://www.behance.net/triajipramuditya", label: "Behance" },
               ].map((social, idx) => (
                 <Link
                   key={idx}
